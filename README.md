@@ -413,3 +413,40 @@ Before submitting:
 **Project:** Waygood Study Abroad Candidate Evaluation  
 **Backend:** Node.js, Express.js, MongoDB, Mongoose  
 **Testing:** Jest, Supertest
+
+
+
+## Bonus Features
+
+### 1. Authentication Rate Limiting
+- Added rate limiting to authentication routes using `express-rate-limit`.
+- Limits requests to 10 per 15-minute window.
+- Returns HTTP `429 Too Many Requests` when the limit is exceeded.
+
+### 2. Personalized Study Plan
+- Added an authenticated endpoint: `POST /api/study-plan`.
+- Generates a five-step, rule-based study plan using the student's saved preferences.
+- Considers target countries, interested fields, budget, and English proficiency score.
+- Returns the plan as JSON.
+- Note: This is a rule-based feature, not an AI-generated assessment.
+
+### 3. Automated Testing
+- Test framework: Jest and Supertest.
+- Run the test suite:
+
+```bash
+cd backend
+npm test
+```
+
+- Current result: **6 tests passing**.
+
+## Additional API Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/study-plan` | Generate a personalized, rule-based study plan |
+| GET | `/api/auth/me` | Retrieve the authenticated student's profile |
+| GET | `/api/dashboard/overview` | Retrieve dashboard summary statistics |
+
+**Authentication:** The study plan endpoint requires a valid JWT access token. Send it using the `Authorization: Bearer <token>` header.

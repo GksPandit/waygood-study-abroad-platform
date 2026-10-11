@@ -48,3 +48,23 @@ describe("Application API security", () => {
     expect(response.body.success).toBe(false);
   });
 });
+
+describe("Authentication rate limiting", () => {
+  test("repeated login requests should eventually return 429", async () => {
+    let response;
+
+    for (let i = 0; i < 11; i++) {
+      response = await request(app)
+        .post("/api/auth/login")
+        .send({
+          email: "rate-limit-test@example.com",
+          password: "WrongPassword123!"
+        });
+
+      if (response.status === 429) break;
+    }
+
+    expect(response.status).toBe(429);
+    expect(response.body.success).toBe(false);
+  });
+});
