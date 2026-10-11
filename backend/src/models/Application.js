@@ -52,7 +52,7 @@ const applicationSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: applicationStatuses,
-      default: "draft",
+      default: "submitted",
       index: true,
     },
     timeline: {
